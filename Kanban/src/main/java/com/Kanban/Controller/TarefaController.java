@@ -34,7 +34,7 @@ public class TarefaController {
     }
 
     @PutMapping("/{id}") // atualizar tarefa
-    public Tarefa putTarefa(@PathVariable Integer id,  @RequestBody Tarefa tarefa){
+    public Tarefa putTarefa(@PathVariable int id,  @RequestBody Tarefa tarefa){
         if(tarefaService.selecId(id)!=null){
             return tarefaService.putTarefa(id,tarefa);
         }

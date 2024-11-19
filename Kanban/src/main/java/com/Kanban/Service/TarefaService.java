@@ -58,7 +58,8 @@ public class TarefaService {
     }
 
     // Método auxiliar para exibir uma tarefa com formatação de cores
-    private void exibirTarefa(Tarefa tarefa, LocalDate now) {
+    private void
+    exibirTarefa(Tarefa tarefa, LocalDate now) {
         String prioridade = tarefa.getPriority().toString(); // Obtenha a prioridade da tarefa
 
         if (tarefa.getDueDate().isBefore(now) && !tarefa.getStatus().equalsIgnoreCase("Concluído")) {
