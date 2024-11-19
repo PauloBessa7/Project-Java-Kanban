@@ -14,6 +14,8 @@ Cada tarefa pode ser movida entre essas colunas conforme seu progresso, facilita
 ## Tecnologias Utilizadas
 
 - **Java** com **Spring Boot**
+- **Spring Security**
+- **Auth0** para autenticação e autorização
 - **Banco de dados H2** (in-memory)
 - **Postman** para testes de API
 - **JPA** (Java Persistence API) para mapeamento e persistência de dados
@@ -38,6 +40,11 @@ Cada tarefa pode ser movida entre essas colunas conforme seu progresso, facilita
    - Editar tarefas (título, descrição, prioridade, etc.).
    - Excluir tarefas.
 
+3. **Autenticação com JWT**
+   - **POST /auth**: Permite a criação de um novo usuário.
+   - **POST /auth/login**: Autentica o usuário e retorna um token JWT.
+   - Todas as demais rotas exigem um token de autenticação válido no cabeçalho `Authorization`.
+
 ### Funcionalidades Extras
 
 - **Ordenação de Tarefas**: ordenar tarefas dentro de cada coluna por prioridade.
@@ -52,6 +59,11 @@ Cada tarefa pode ser movida entre essas colunas conforme seu progresso, facilita
 
 ## Endpoints da API na porta :8080
 
+### Autenticação
+
+- **POST /auth**: Cria um novo usuário.
+- **POST /auth/login**: Autentica o usuário e retorna um token JWT.
+
 ### Tarefas
 
 - **POST /tasks**: Cria uma nova tarefa na coluna "A Fazer".
@@ -61,6 +73,27 @@ Cada tarefa pode ser movida entre essas colunas conforme seu progresso, facilita
 - **DELETE /tasks/{id}**: Exclui uma tarefa.
 
 ## Exemplos de Requisições no Postman
+
+### Criar Usuário
+
+**POST /auth**
+```json
+{
+    "email": "pauloh.bess@gmail.com",
+    "password": "123",
+    "role": "Admin"
+}
+```
+
+### Login
+
+**POST /auth/login**
+```json
+{
+    "email": "pauloh.bess@gmail.com",
+    "password": "123"
+}
+```
 
 ### Criar Tarefa
 
@@ -88,13 +121,15 @@ Cada tarefa pode ser movida entre essas colunas conforme seu progresso, facilita
 }
 ```
 
+## Observações
+
+- Todas as rotas, exceto **/auth** e **/auth/login**, exigem um token JWT válido no cabeçalho `Authorization`.
+- Ao listar as tarefas no endpoint **GET /tasks**, será retornado um JSON com todas as tarefas, sem organização por status ou prioridade.
+- A filtragem por prioridade e status será exibida apenas como um output no terminal do projeto.
+
 ## Como Executar o Projeto
 
 1. Clone o repositório.
 2. Abra o projeto em sua IDE preferida.
 3. Execute o aplicativo Spring Boot.
 4. Utilize o Postman ou outra ferramenta de testes para fazer requisições à API.
-
-## Observações
-- Ao listar as tarefas no endpoint GET /tasks, será retornado um JSON com todas as tarefas, sem organização por status ou prioridade.
-- A filtragem por prioridade e status será exibida apenas como um output no terminal do projeto.
